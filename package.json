@@ -1,7 +1,7 @@
 {
-  "name": "midi-password-generator",
+  "name": "webmidi-password-generator",
   "version": "0.0.1",
-  "description": "generate password with MIDI device",
+  "description": "generate password with playing MIDI devices",
   "main": "index.js",
   "scripts": {
     "test": "eslint src/*.es6 src/*/*.es6",
@@ -15,6 +15,7 @@
   "author": "Sho Hashimoto <hashimoto@shokai.org>",
   "license": "MIT",
   "dependencies": {
+    "debug": "^2.2.0",
     "midi": "^0.9.3"
   },
   "devDependencies": {
