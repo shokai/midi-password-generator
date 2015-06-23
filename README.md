@@ -5,17 +5,6 @@ generate password with playing MIDI devices.
 
 ![screenshot](http://gyazo.com/bd11382d7db992c955676d689b5966af.png)
 
-## Build
+## Run Node App
 
-    % npm run build
-    # or
-    % npm run watch
-
-## Run
-
-    % node dist/generate.js
-
-## Debug
-
-    % export DEBUG=*
-    % node dist/generate.js
+    % DEBUG=* babel-node node/generate.es6
