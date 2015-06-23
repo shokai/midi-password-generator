@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "eslint src/*.es6 src/*/*.es6",
-    "build": "browserify --extension=.es6 -t babelify src/background.es6 | uglifyjs -o chrome_ext/background.js",
-    "watch:build": "watchify --verbose --debug --extension=.es6 -t babelify src/background.es6 -o chrome_ext/background.js",
+    "build": "browserify --extension=.es6 -t babelify src/main.es6 | uglifyjs -o chrome_ext/main.js",
+    "watch:build": "watchify --verbose --debug --extension=.es6 -t babelify src/main.es6 -o chrome_ext/main.js",
     "watch": "parallelshell 'npm run watch:build' 'esw src/ --watch'"
   },
   "keywords": [
@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "debug": "^2.2.0",
+    "jquery": "^2.1.4",
     "midi": "^0.9.3"
   },
   "devDependencies": {
