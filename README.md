@@ -5,6 +5,11 @@ generate password with playing MIDI devices.
 
 ![screenshot](http://gyazo.com/bd11382d7db992c955676d689b5966af.png)
 
+## Build Chrome Ext
+
+    % npm run build
+
+
 ## Run Node App
 
     % DEBUG=* babel-node node/generate.es6
