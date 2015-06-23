@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "eslint src/*.es6 src/*/*.es6",
-    "build": "babel src/ --out-dir dist/ --source-maps inline",
-    "watch": "parallelshell 'npm run build -- --watch' 'esw src/ --watch'"
+    "build": "browserify --extension=.es6 -t babelify src/background.es6 -o chrome_ext/background.js",
+    "watch:build": "watchify --verbose --debug --extension=.es6 -t babelify src/background.es6 -o chrome_ext/background.js",
+    "watch": "parallelshell 'npm run watch:build' 'esw src/ --watch'"
   },
   "keywords": [
     "MIDI",
@@ -21,8 +22,11 @@
   "devDependencies": {
     "babel": "^5.5.8",
     "babel-eslint": "^3.1.17",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.4",
     "eslint": "^0.23.0",
     "eslint-watch": "^1.2.4",
-    "parallelshell": "^1.1.1"
+    "parallelshell": "^1.1.1",
+    "watchify": "^3.2.2"
   }
 }
