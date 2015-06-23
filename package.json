@@ -16,9 +16,9 @@
   "author": "Sho Hashimoto <hashimoto@shokai.org>",
   "license": "MIT",
   "dependencies": {
-    "debug": "^2.2.0",
-    "jquery": "^2.1.4",
-    "midi": "^0.9.3"
+    "debug": "*",
+    "jquery": "^2.1",
+    "midi": "*"
   },
   "devDependencies": {
     "babel": "^5.5.8",
