@@ -1,25 +1,30 @@
 "use strict";
 
-import midi from "midi";
+var debug = require("debug")("webmidipass:generator");
+
+import * as Util from "./util";
 import {EventEmitter} from "events";
 import crypto from "crypto";
-var debug = require("debug")("webmidipass:enerator");
+
+if(Util.getEnv() === "nodejs"){
+  var midi = require("midi");
+}
 
 module.exports = class PasswordGenerator extends EventEmitter{
   constructor(length = 12){
     super();
     this.length = length;
-
-    var input = new midi.input();
-    for(let i = 0; i < input.getPortCount(); i++){
-      let name = input.getPortName(i);
-      console.log(`found device [${i}] "${name}"`);
-      input.openPort(i);
+    switch(Util.getEnv()){
+    case "nodejs":
+      this.initNodejs();
+      break;
+    case "browser":
+      this.initBrowser();
     }
 
     this.queue = [];
     var timeout = null;
-    input.on("message", (deltaTime, msg) => {
+    this.on("midi:message", (deltaTime, msg) => {
       debug(msg);
       clearTimeout(timeout);
       var interval = Math.floor(deltaTime / 0.5);
@@ -32,6 +37,41 @@ module.exports = class PasswordGenerator extends EventEmitter{
         this.queue = [];
       }, 1000);
     });
+
+  }
+
+  initBrowser(){
+    if(navigator && typeof navigator.requestMIDIAccess !== "function"){
+      throw new Error("Web MIDI API is not supported");
+    }
+    navigator.requestMIDIAccess()
+      .then(webMidi => {
+        let it = webMidi.inputs.values();
+        while(true){
+          let input = it.next();
+          if(input.done) break;
+          console.log(`found device "${input.value.name}"`);
+          let lastAt = 0;
+          input.value.onmidimessage = (msg) => {
+            var deltaTime = (msg.receivedTime - lastAt)/1000;
+            this.emit("midi:message", deltaTime, msg.data);
+            lastAt = msg.receivedTime;
+          };
+        }
+      });
+  }
+
+  initNodejs(){
+    var input = new midi.input();
+    for(let i = 0; i < input.getPortCount(); i++){
+      let name = input.getPortName(i);
+      console.log(`found device [${i}] "${name}"`);
+      input.openPort(i);
+    }
+
+    input.on("message", (deltaTime, msg) => {
+      this.emit("midi:message", deltaTime, msg);
+    });
   }
 
   encode(str){
@@ -40,4 +80,4 @@ module.exports = class PasswordGenerator extends EventEmitter{
       .slice(0, this.length);
   }
 
-}
+};

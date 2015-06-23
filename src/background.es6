@@ -1,8 +1,6 @@
 "use strict";
-
+localStorage.debug = "*";
 import PasswordGenerator from "./PasswordGenerator";
-
-console.log(PasswordGenerator);
 
 var passgen = new PasswordGenerator(8);
 passgen.on("password", function(pass){
