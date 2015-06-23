@@ -1,6 +1,6 @@
 "use strict";
 
-import PasswordGenerator from "../src/PasswordGenerator";
+import PasswordGenerator from "../src/password_generator";
 
 var pasgen = new PasswordGenerator(12);
 pasgen.on("password", function(pass){

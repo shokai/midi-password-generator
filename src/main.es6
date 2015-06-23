@@ -1,5 +1,5 @@
 "use strict";
-import PasswordGenerator from "./PasswordGenerator";
+import PasswordGenerator from "./password_generator";
 import $ from "jquery";
 
 var target = null;
