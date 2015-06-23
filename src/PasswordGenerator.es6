@@ -53,7 +53,7 @@ module.exports = class PasswordGenerator extends EventEmitter{
           console.log(`found device "${input.value.name}"`);
           let lastAt = 0;
           input.value.onmidimessage = (msg) => {
-            var deltaTime = (msg.receivedTime - lastAt)/1000;
+            var deltaTime = (msg.receivedTime - lastAt) / 1000;
             this.emit("midi:message", deltaTime, msg.data);
             lastAt = msg.receivedTime;
           };
