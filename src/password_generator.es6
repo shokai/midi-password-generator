@@ -10,7 +10,7 @@ if(Util.getEnv() === "nodejs"){
   var midi = require("midi");
 }
 
-module.exports = class PasswordGenerator extends EventEmitter{
+export default class PasswordGenerator extends EventEmitter{
   constructor(length = 12){
     super();
     this.length = length;
