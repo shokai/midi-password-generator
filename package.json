@@ -4,7 +4,7 @@
   "description": "generate password with playing MIDI devices",
   "main": "index.js",
   "scripts": {
-    "test": "eslint src/*.es6 src/*/*.es6",
+    "test": "eslint src/*.es6",
     "build": "browserify --extension=.es6 -t babelify src/main.es6 | uglifyjs -o chrome_ext/main.js",
     "watch:build": "watchify --verbose --debug --extension=.es6 -t babelify src/main.es6 -o chrome_ext/main.js",
     "watch": "parallelshell 'npm run watch:build' 'esw src/ --watch'"

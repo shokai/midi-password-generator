@@ -80,4 +80,4 @@ export default class PasswordGenerator extends EventEmitter{
       .slice(0, this.length);
   }
 
-};
+}
